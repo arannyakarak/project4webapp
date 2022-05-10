@@ -45,3 +45,73 @@ input{
     border-radius: 10px;
     padding: 8px;
 }
+
+
+
+
+/* heading text */
+@import url('https://fonts.googleapis.com/css?family=Work+Sans:900');
+
+
+.heading{
+  justify-content: center;
+    position: absolute;
+    top: 2px;
+    left: 40%;
+    z-index: 400;
+    margin: 0;
+    
+}
+
+.random-word {
+  display: inline-block;
+  text-transform: uppercase;
+  color: #7C48AE;
+  letter-spacing: 3px;
+  width: auto;
+/*   transition: all 1.25s; */
+  animation: slidedown 4s infinite;
+  -webkit-animation: slidedown 4s infinite;
+  -moz-animation: slidedown 4s infinite;
+}
+
+@keyframes slidedown {
+  0% {
+    opacity: 50;
+  }
+  
+  5% {
+    opacity: 0;
+    transform: translateY(0.5em);
+  }
+  
+  7% {
+    transform: translateY(-1em);
+  }
+  
+  10% {
+    opacity: 0;
+  }
+  
+  20% {
+    transform: translateY(0);
+    opacity: 100;
+  }
+}
+@media only screen and (max-width: 600px) {
+    .heading{
+        
+      justify-content: center;
+        position: absolute;
+        top: 60px;
+        left: 10%;
+        font-size:1rem;
+       
+    }
+    .random-word {
+        display: flex;
+        flex-direction: column;
+       
+      }
+  }
+  
