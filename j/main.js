@@ -58,19 +58,19 @@ Stamen_Watercolor.addTo(map);
                       GEOJSON               
 ===================================================*/
 
-var linedata = L.geoJSON(lineJSON).addTo(map);
-var pointdata = L.geoJSON(pointJSON).addTo(map);
-var nepalData = L.geoJSON(nepaldataa).addTo(map);
-var polygondata = L.geoJSON(polygonJSON,{
-    onEachFeature: function(feature,layer){
-        layer.bindPopup('<b>This is a </b>' + feature.properties.name)
-    },
-    style:{
-        fillColor: 'red',
-        fillOpacity:1,
-        color: 'green'
-    }
-}).addTo(map);
+// var linedata = L.geoJSON(lineJSON).addTo(map);
+// var pointdata = L.geoJSON(pointJSON).addTo(map);
+// var nepalData = L.geoJSON(nepaldataa).addTo(map);
+// var polygondata = L.geoJSON(polygonJSON,{
+//     onEachFeature: function(feature,layer){
+//         layer.bindPopup('<b>This is a </b>' + feature.properties.name);
+//     },
+//     style:{
+//         fillColor: 'red',
+//         fillOpacity:1,
+//         color: 'green'
+//     }
+// }).addTo(map);
 
 /*===================================================
                       LAYER CONTROL               
@@ -109,14 +109,22 @@ L.geoJSON(statesData).addTo(map);
 
 
 function getColor(d) {
-    return d > 1000 ? '#800026' :
-           d > 500  ? '#BD0026' :
-           d > 200  ? '#E31A1C' :
-           d > 100  ? '#FC4E2A' :
-           d > 50   ? '#FD8D3C' :
-           d > 20   ? '#FEB24C' :
-           d > 10   ? '#FED976' :
-                      '#FFEDA0';
+    // return d > 1000 ? '#032C10' :
+    //        d > 500  ? '#05471A' :
+    //        d > 200  ? '#15903A' :
+    //        d > 100  ? '#1CB95A' :
+    //        d > 50   ? '#3CE77F' :
+    //        d > 20   ? '#82FBB1' :
+    //        d > 10   ? '#BBE8CC' :
+    //                   '#E0FEEB';
+    return d > 1000 ? '#020004' :
+           d > 500  ? '#2C084F' :
+           d > 200  ? '#4C1780' :
+           d > 100  ? '#7C48AE' :
+           d > 50   ? '#AA76DD' :
+           d > 20   ? '#CCA5F3' :
+           d > 10   ? '#DED1E4' :
+                      '#F4E3FD';
 }
 
 function style(feature) {
@@ -228,7 +236,7 @@ async function addMarkers() {
   
       var Icon = L.Icon.extend({
         options: {
-          shadowUrl: "http://leafletjs.com/examples/custom-icons/leaf-shadow.png",
+          shadowUrl: "",
           iconSize: [30, 85],
           shadowSize: [50, 64],
           iconAnchor: [22, 94],
@@ -237,7 +245,7 @@ async function addMarkers() {
         }
       }),
         loc = [weatherResult.coord.lat, weatherResult.coord.lon],
-        html = "<b>usr " + i + "</b><br/>tweet " + i,
+        html = "<b>Lat: " + weatherResult.coord.lat + "</b><br/>Lon: " + weatherResult.coord.lon,
         marker = L.marker(loc, {
           icon: new Icon({
             iconUrl:
@@ -256,7 +264,8 @@ async function addMarkers() {
       marker.addTo(map); // map.addLayer(marker); .openPopup();
     }
   }
-  function removeMarkers() {
+
+  async function removeMarkers() {
     map.eachLayer(function(layer) {
       if (
         layer instanceof L.Marker &&
@@ -276,7 +285,10 @@ async function addMarkers() {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
   function getRandomItemFromArray(
-    ar = ["leaf-green.png", "leaf-red.png", "leaf-orange.png"]
+    // ar = ["leaf-green.png", "leaf-red.png", "leaf-orange.png"]
+    ar = [ "leaf-orange.png"]
+    
+    
   ) {
     return ar[getRandomIntBetween(ar.length - 1, 0)];
   }
@@ -343,3 +355,53 @@ async function addMarkers() {
     return data;
   }
   
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+// heading info
+let i = 0;
+
+const randomizeText = () => {
+  const phrase = document.querySelector('.random-word');
+  const compStyles = window.getComputedStyle(phrase);
+  const animation = compStyles.getPropertyValue('animation');
+  const animationTime = parseFloat(animation.match(/\d*[.]?\d+/)) * 1000;
+  
+  const phrases = ['State', 'Capital','Population ', 'Weather', 'Latitude', 'longitude' ];
+  
+  i = randomNum(i, phrases.length);
+  const newPhrase = phrases[i];
+  
+  setTimeout(() => {
+    phrase.textContent = newPhrase;
+  }, 300); // time to allow opacity to hit 0 before changing word
+};
+
+const randomNum = (num, max) => {
+  let j = Math.floor(Math.random() * max);
+  
+  // ensure diff num every time
+  if (num === j) {
+    return randomNum(i, max);
+  } else {
+    return j;
+  }
+};
+
+const getAnimationTime = () => {
+  const phrase = document.querySelector('.random-word');
+  const compStyles = window.getComputedStyle(phrase);
+  let animation = compStyles.getPropertyValue('animation');
+  
+  // firefox support for non-shorthand property
+  animation != "" ? animation : animation = compStyles.getPropertyValue('-moz-animation-duration');
+  
+    // webkit support for non-shorthand property
+  animation != "" ? animation : animation = compStyles.getPropertyValue('-webkit-animation-duration');
+  
+  
+  const animationTime = parseFloat(animation.match(/\d*[.]?\d+/)) * 1000;
+  return animationTime;
+};
+
+randomizeText();
+setInterval(randomizeText, getAnimationTime());
+///////////////////////////////////////////////////////////////////////////////////////
