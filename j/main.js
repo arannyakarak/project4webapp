@@ -343,3 +343,69 @@ async function addMarkers() {
     return data;
   }
   
+// capital popup
+async function getCapitals(){
+
+  let states =  await fetch('./data/capital.json');
+     let capitalNames =  states.json();
+     console.log(states);
+     console.log(capitalNames);
+     return capitalNames;
+ }
+   
+ async function addPopups() {
+    removePopups();
+ 
+   var list = await getCapitals();
+     
+       let states = list.states;
+       console.log(states);
+   for (var i = 0; i < states.length; i++)
+    {
+    
+     var data =  states[i].capital;
+     console.log(data);
+    
+     var Icon = L.Icon.extend({
+       options: {
+         shadowUrl: "",
+         iconSize: [40, 40],
+         shadowSize: [0, 0],
+         iconAnchor: [10, 10],
+         shadowAnchor: [0, 0],
+         popupAnchor: [0, 0]
+       }
+     }),
+       location = [states[i].lat,states[i].long];
+       city = states[i].capital;
+       //console.log(cap);
+       html = `<b> ${city} </b><br/>`,
+       marker = L.marker(location, {
+         icon: new Icon({
+           iconUrl: "i/marker.svg"
+         }),
+          //title: "tweet " + i,
+          // title: location,
+         // title: "Temp: " + weatherResult.main.temp + "°C",
+         title: `${states[i].name} /Capital: ${states[i].capital}`,
+         alt: "capital " + i,
+         riseOnHover: true
+       }).bindPopup(html /* ,{autoClose:false} */);
+       marker.isRandom = false; // just to differenciate from any other markers available in the map
+       // add just marker/ marker with popup/ just popup
+       marker.addTo(map); // map.addLayer(marker); .openPopup();
+   }
+ 
+ }
+ 
+ async function removePopups() {
+   map.eachLayer(function(layer) {
+    if (
+      layer instanceof L.Marker &&
+      layer.isRandom == false /* ensure that we are not removing any other popups available in the map, see how the popup is added to the map */
+    ) {
+      layer.remove(); // layer.removeFrom(map); map.removeLayer(layer);
+    }
+  });
+ }
+ 
