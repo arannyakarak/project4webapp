@@ -245,7 +245,8 @@ async function addMarkers() {
         }
       }),
         loc = [weatherResult.coord.lat, weatherResult.coord.lon],
-        html = "<b>Lat: " + weatherResult.coord.lat + "</b><br/>Lon: " + weatherResult.coord.lon,
+        html = states[i].state_name +"<br>" +"<b>Lon:</b>  " + weatherResult.coord.lat +"<br>" + 
+        "<b>Lat:</b> " + weatherResult.coord.lon +"<br>" + "<b>Temp:</b> " + weatherResult.main.temp + "°C" +"<br>" +"<b>Humidity:</b> "+ weatherResult.main.humidity + "%",
         marker = L.marker(loc, {
           icon: new Icon({
             iconUrl:
@@ -253,10 +254,10 @@ async function addMarkers() {
                 getRandomItemFromArray()
           }),
           // title: "tweet " + i,
-          // title: states[i].state_name,
+          title: states[i].state_name,
           // title: "Temp: " + weatherResult.main.temp + "°C",
-          title: states[i].state_name + "/" + "Temp: " + weatherResult.main.temp + "°C",
-          alt: "usr " + i,
+          // title: states[i].state_name + "/" + "Temp: " + weatherResult.main.temp + "°C",
+          alt: "state " + i,
           riseOnHover: true
         }).bindPopup(html /* ,{autoClose:false} */);
       marker.isRandom = true; // just to differenciate from any other markers available in the map
@@ -391,7 +392,7 @@ async function getCapitals(){
        location = [states[i].lat,states[i].long];
        city = states[i].capital;
        //console.log(cap);
-       html = `<b> ${city} </b><br/>`,
+       html = '<b>Capital:</b>' +`<b> ${city} </b>`,
        marker = L.marker(location, {
          icon: new Icon({
            iconUrl: "i/marker.svg"
@@ -470,4 +471,5 @@ const getAnimationTime = () => {
 
 randomizeText();
 setInterval(randomizeText, getAnimationTime());
+
 ///////////////////////////////////////////////////////////////////////////////////////
