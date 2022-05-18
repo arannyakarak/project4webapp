@@ -117,15 +117,8 @@ L.Control.geocoder().addTo(map);
 L.geoJSON(statesData).addTo(map);
 
 
+
 function getColor(d) {
-  // return d > 1000 ? '#032C10' :
-  //        d > 500  ? '#05471A' :
-  //        d > 200  ? '#15903A' :
-  //        d > 100  ? '#1CB95A' :
-  //        d > 50   ? '#3CE77F' :
-  //        d > 20   ? '#82FBB1' :
-  //        d > 10   ? '#BBE8CC' :
-  //                   '#E0FEEB';
   return d > 1000 ? '#020004' :
     d > 500 ? '#2C084F' :
     d > 200 ? '#4C1780' :
@@ -220,7 +213,7 @@ legend.onAdd = function (map) {
   var div = L.DomUtil.create('div', 'info legend'),
     grades = [0, 10, 20, 50, 100, 200, 500, 1000],
     labels = [];
-
+    div.innerHTML += '<h4>Population Legend</h4>';
   // loop through our density intervals and generate a label with a colored square for each interval
   for (var i = 0; i < grades.length; i++) {
     div.innerHTML +=
@@ -233,20 +226,34 @@ legend.onAdd = function (map) {
 
 legend.addTo(map);
 
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////
 const apiKey = 'eb380ce293c80acb396c9d71258f3d32';
+var states;
+var statesWeather = [];
+getAllUSStates();
+
+async function getAllUSStates() {
+  states = await fetchStates();
+
+  for (var i = 0; i < states.length; i++) {
+    var weatherResult = await fetchWeather(apiKey, states[i].state_name);
+    statesWeather.push(weatherResult);
+  }
+}
+////////////////////////
+
 
 // add marker with popup
 async function addMarkers() {
   try {
   removeMarkers();
 
-  var states = await fetchStates();
+  // var states = await fetchStates();
 
-  for (var i = 0; i < states.length; i++) {
+  for (var i = 0; i < statesWeather.length; i++) {
 
-    var weatherResult = await fetchWeather(apiKey, states[i].state_name);
+    var weatherResult = statesWeather[i];
+    // var weatherResult = await fetchWeather(apiKey, states[i].state_name);
 
     var Icon = L.Icon.extend({
         options: {
