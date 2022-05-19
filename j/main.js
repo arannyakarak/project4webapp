@@ -18,14 +18,6 @@ var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 });
 osm.addTo(map);
 
-/*===================================================
-                      MARKER               
-===================================================*/
-
-// var singleMarker = L.marker([28.25255,83.97669]);
-// singleMarker.addTo(map);
-// var popup = singleMarker.bindPopup('This is a popup')
-// popup.addTo(map);
 
 /*===================================================
                      TILE LAYER               
@@ -63,23 +55,6 @@ var Stamen_Watercolor = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/w
 Stamen_Watercolor.addTo(map);
 
 
-/*===================================================
-                      GEOJSON               
-===================================================*/
-
-// var linedata = L.geoJSON(lineJSON).addTo(map);
-// var pointdata = L.geoJSON(pointJSON).addTo(map);
-// var nepalData = L.geoJSON(nepaldataa).addTo(map);
-// var polygondata = L.geoJSON(polygonJSON,{
-//     onEachFeature: function(feature,layer){
-//         layer.bindPopup('<b>This is a </b>' + feature.properties.name);
-//     },
-//     style:{
-//         fillColor: 'red',
-//         fillOpacity:1,
-//         color: 'green'
-//     }
-// }).addTo(map);
 
 /*===================================================
                       LAYER CONTROL               
@@ -92,14 +67,7 @@ var baseLayers = {
   "OpenStreetMap": osm,
 };
 
-// var overlays = {
-//     "Marker": singleMarker,
-//     "PointData":pointdata,
-//     "LineData":linedata,
-//     "PolygonData":polygondata
-// };
 
-// L.control.layers(baseLayers, overlays).addTo(map);
 L.control.layers(baseLayers).addTo(map);
 
 
@@ -190,7 +158,7 @@ geojson = L.geoJson(statesData, {
 var info = L.control();
 
 info.onAdd = function (map) {
-  this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+  this._div = L.DomUtil.create('div', 'info animate slide-right delay-3'); // create a div with a class "info"
   this.update();
   return this._div;
 };
@@ -210,7 +178,7 @@ var legend = L.control({
 
 legend.onAdd = function (map) {
 
-  var div = L.DomUtil.create('div', 'info legend'),
+  var div = L.DomUtil.create('div', 'info legend animate spin fade delay-4'),
     grades = [0, 10, 20, 50, 100, 200, 500, 1000],
     labels = [];
     div.innerHTML += '<h4>Population Legend</h4>';
