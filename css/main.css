@@ -152,16 +152,16 @@ opacity: 0.7;
 
 /* Animation Delays */
 .delay-1 {
-  animation-delay: 0.5s;
+  animation-delay: 0.4s;
 }
 .delay-2 {
-  animation-delay: 1.3s;
+  animation-delay: 0.9s;
 }
 .delay-3 {
-  animation-delay: 1.9s;
+  animation-delay: 1.2s;
 }
 .delay-4 {
-  animation-delay: 2.4s;
+  animation-delay: 1.8s;
 }
 
 
