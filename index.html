@@ -14,14 +14,14 @@
 
 </head>
 <body>
-    <!-- <div id="map"></div> -->
+    <main>
     <div id="map" class="map animate fade"></div>
     <div class="heading">
         <h1 class="animate fade delay-2">EXPLORE USA 
           <span class='random-word'></span>
         </h1>
       </div>
-      
+      <section>
     <div class="controls leaflet-bar animate slide-left delay-1">
         <input class="text" type="button" value="+Capitals" onclick="addPopups()" title="Click to add popups @ capital of us states" />
         <input class="text" type="button" value="-Capitals" onclick="removePopups()" title="Click to remove popups" />
@@ -29,6 +29,8 @@
             title="Click to add markers with @ us states locations and weather. Hover & click on the marker to see the popup" />
         <input class="text"type="button" value="-Weather" onclick="removeMarkers()" title="Click to remove markers" />
     </div>
+</section>
+</main>
 </body>
 </html>
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
