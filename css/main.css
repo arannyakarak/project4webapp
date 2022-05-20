@@ -167,7 +167,7 @@ opacity: 0.7;
 
 
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 800px) {
     .heading{
         
       justify-content: center;
