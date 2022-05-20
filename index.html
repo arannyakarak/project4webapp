@@ -8,6 +8,13 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="./data/line.js"></script>
+    <script src="./data/point.js"></script>
+    <script src="./data/polygon.js"></script>
+    <script src="./data/nepaldata.js"></script>
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <script src="./data/usstates.js"></script>
     <script src="https://unpkg.com/dexie/dist/dexie.js"></script>
     <script src="j/main.js" defer></script>
     
@@ -25,18 +32,11 @@
     <div class="controls leaflet-bar animate slide-left delay-1">
         <input class="text" type="button" value="+Capitals" onclick="addPopups()" title="Click to add popups @ capital of us states" />
         <input class="text" type="button" value="-Capitals" onclick="removePopups()" title="Click to remove popups" />
-        <input class="text"type="button" value="+Weather" onclick="addMarkers()"
+        <input class="text" type="button" value="+Weather" onclick="addMarkers()"
             title="Click to add markers with @ us states locations and weather. Hover & click on the marker to see the popup" />
-        <input class="text"type="button" value="-Weather" onclick="removeMarkers()" title="Click to remove markers" />
+        <input class="text" type="button" value="-Weather" onclick="removeMarkers()" title="Click to remove markers" />
     </div>
 </section>
 </main>
 </body>
 </html>
-<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-<script src="./data/line.js"></script>
-<script src="./data/point.js"></script>
-<script src="./data/polygon.js"></script>
-<script src="./data/nepaldata.js"></script>
-<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
-<script src="./data/usstates.js"></script>
